@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User, type: :model, focus: true do
 
   context "validations" do
 

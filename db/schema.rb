@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928122347) do
+ActiveRecord::Schema.define(version: 20170928133556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "status_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -24,4 +39,7 @@ ActiveRecord::Schema.define(version: 20170928122347) do
     t.string   "password_digest", limit: 200
   end
 
+  add_foreign_key "likes", "statuses"
+  add_foreign_key "likes", "users"
+  add_foreign_key "statuses", "users"
 end
